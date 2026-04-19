@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Anis Emad — DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Sora:wght@300;400;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0b0b0d; --bg2: #111114; --bg3: #18181c;
+    --border: rgba(255,255,255,0.07); --border-h: rgba(255,255,255,0.14);
+    --text: #efefed; --muted: #7a7a77;
+    --accent: #4eeea0; --accent2: #38d4ff;
+    --mono: 'DM Mono', monospace; --sans: 'Sora', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 5rem;
+    background: rgba(11,11,13,0.88); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: var(--mono); font-size: 14px; color: var(--accent); letter-spacing: 0.04em; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 13px; color: var(--muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+  .hero-inner { max-width: 1060px; margin: 0 auto; padding: 9rem 4rem 5rem; width: 100%; position: relative; z-index: 1; }
+  .grid-bg {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 70% 80% at 90% 40%, black, transparent);
+  }
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+    border: 1px solid var(--border); padding: 0.35rem 1rem;
+    border-radius: 999px; margin-bottom: 2.5rem;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: blink 2.2s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+  .hero-tag { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-tag::before { content:''; width:28px; height:1px; background: var(--accent); display:inline-block; }
+  h1 { font-size: clamp(2.8rem, 6.5vw, 5rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1.5rem; }
+  .accent { color: var(--accent); }
+  .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 540px; font-weight: 300; line-height: 1.9; margin-bottom: 2.8rem; }
+  .cta-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .btn { font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; padding: 0.7rem 1.6rem; border-radius: 5px; cursor: pointer; text-decoration: none; transition: all 0.2s; border: 1px solid transparent; display: inline-block; }
+  .btn-primary { background: var(--accent); color: #0b0b0d; font-weight: 500; }
+  .btn-primary:hover { background: #7af7be; }
+  .btn-outline { border-color: var(--border-h); color: var(--muted); }
+  .btn-outline:hover { border-color: var(--text); color: var(--text); }
+  .hero-links { display: flex; gap: 1.75rem; margin-top: 2.5rem; flex-wrap: wrap; }
+  .hero-links a { font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 0.05em; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+  .hero-links a:hover { color: var(--accent); }
+  .hero-links a svg { width:13px; height:13px; flex-shrink:0; }
+
+  /* SECTIONS */
+  .section-wrap { max-width: 1060px; margin: 0 auto; padding: 6.5rem 4rem; border-top: 1px solid var(--border); }
+  .section-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  h2 { font-size: 1.9rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 3rem; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: start; }
+  .about-text p { color: var(--muted); font-weight: 300; margin-bottom: 1.1rem; line-height: 1.95; }
+  .about-text p strong { color: var(--text); font-weight: 400; }
+  .stats-box { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--border); gap: 1px; }
+  .stat { background: var(--bg2); padding: 1.6rem; }
+  .stat-num { font-family: var(--mono); font-size: 2rem; font-weight: 300; color: var(--accent); line-height: 1; margin-bottom: 0.4rem; }
+  .stat-lbl { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.07em; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .skill-group { background: var(--bg2); padding: 1.6rem 1.75rem; transition: background 0.2s; }
+  .skill-group:hover { background: var(--bg3); }
+  .sg-title { font-family: var(--mono); font-size: 11px; color: var(--accent2); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.1rem; }
+  .tag-list { display: flex; flex-direction: column; gap: 0.55rem; }
+  .tag { font-family: var(--mono); font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 0.6rem; transition: color 0.2s; }
+  .tag::before { content:''; width:5px; height:5px; border-radius:50%; background: var(--border-h); flex-shrink:0; transition: background 0.2s; }
+  .skill-group:hover .tag { color: var(--text); }
+  .skill-group:hover .tag::before { background: var(--accent); }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .project-card { background: var(--bg2); padding: 2rem; display: flex; flex-direction: column; gap: 0.75rem; transition: background 0.2s; text-decoration: none; color: inherit; position: relative; overflow: hidden; }
+  .project-card::after { content:''; position:absolute; top:0; left:0; right:0; height:1px; background: linear-gradient(90deg, var(--accent), transparent); opacity:0; transition: opacity 0.3s; }
+  .project-card:hover { background: var(--bg3); }
+  .project-card:hover::after { opacity:1; }
+  .proj-num { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
+  .proj-title { font-size: 1.05rem; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+  .proj-desc { font-size: 14px; color: var(--muted); font-weight: 300; line-height: 1.8; flex: 1; }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+  .ptag { font-family: var(--mono); font-size: 11px; color: var(--accent); background: rgba(78,238,160,0.07); border: 1px solid rgba(78,238,160,0.18); padding: 0.2rem 0.6rem; border-radius: 4px; letter-spacing: 0.04em; }
+  .proj-arrow { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-top: 0.5rem; transition: color 0.2s; }
+  .project-card:hover .proj-arrow { color: var(--accent); }
+
+  /* CONTACT */
+  .contact-intro { font-size: 1rem; color: var(--muted); font-weight: 300; max-width: 480px; margin-bottom: 2.5rem; line-height: 1.9; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .contact-item { background: var(--bg2); padding: 1.75rem 2rem; display: flex; flex-direction: column; gap: 0.3rem; text-decoration: none; color: inherit; transition: background 0.2s; }
+  .contact-item:hover { background: var(--bg3); }
+  .c-label { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+  .c-value { font-family: var(--mono); font-size: 14px; color: var(--text); transition: color 0.2s; }
+  .contact-item:hover .c-value { color: var(--accent); }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 2.5rem; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero-inner, .section-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">anis.emad</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="grid-bg"></div>
+  <div class="hero-inner">
+    <div class="status-pill"><span class="dot"></span> Open to opportunities</div>
+    <div class="hero-tag">DevOps Engineer</div>
+    <h1>Hi, I'm<br><span class="accent">Anis Emad</span></h1>
+    <p class="hero-sub">I automate infrastructure, build CI/CD pipelines, and containerize applications. Passionate about system reliability and making deployment painless.</p>
+    <div class="cta-row">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-links">
+      <a href="https://github.com/AnisEmad" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        github.com/AnisEmad
+      </a>
+      <a href="https://linkedin.com/in/anisemad" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        linkedin.com/in/anisemad
+      </a>
+      <a href="mailto:anisemad123@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        anisemad123@gmail.com
+      </a>
+    </div>
+  </div>
+</section>
+
+<div id="about" class="section-wrap">
+  <div class="section-label">01 — About</div>
+  <h2>Who I am</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>DevOps Engineer</strong> based in Cairo, Egypt, with a Computer Science degree from Zagazig University and hands-on training from the <strong>NTI Cloud DevOps Accelerator</strong>.</p>
+      <p>My work focuses on <strong>automating deployment pipelines</strong>, containerizing applications with Docker, and managing scalable cloud environments on AWS. I love turning complex infrastructure problems into clean, repeatable solutions.</p>
+      <p>Outside of DevOps, I'm a competitive programmer — a <strong>Codeforces Specialist</strong> (rating 1429) and two-time <strong>ECPC finalist</strong>. I've also mentored students in competitive programming at Zagazig University.</p>
+    </div>
+    <div class="stats-box">
+      <div class="stat">
+        <div class="stat-num">1429</div>
+        <div class="stat-lbl">Codeforces Rating</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2×</div>
+        <div class="stat-lbl">ECPC Finalist</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3+</div>
+        <div class="stat-lbl">Projects Shipped</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Cairo</div>
+        <div class="stat-lbl">Egypt</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="skills" class="section-wrap">
+  <div class="section-label">02 — Skills</div>
+  <h2>What I work with</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="sg-title">Cloud & Infra</div>
+      <div class="tag-list">
+        <span class="tag">AWS</span>
+        <span class="tag">Linux</span>
+        <span class="tag">Server Management</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-title">CI / CD</div>
+      <div class="tag-list">
+        <span class="tag">GitHub Actions</span>
+        <span class="tag">Git</span>
+        <span class="tag">Automated Pipelines</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-title">Containers</div>
+      <div class="tag-list">
+        <span class="tag">Docker</span>
+        <span class="tag">DockerHub</span>
+        <span class="tag">Containerization</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-title">Programming</div>
+      <div class="tag-list">
+        <span class="tag">Python</span>
+        <span class="tag">Bash / Shell</span>
+        <span class="tag">C / C++</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-title">Backend & DB</div>
+      <div class="tag-list">
+        <span class="tag">Flask</span>
+        <span class="tag">RESTful APIs</span>
+        <span class="tag">MySQL</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-title">Practices</div>
+      <div class="tag-list">
+        <span class="tag">Agile</span>
+        <span class="tag">System Reliability</span>
+        <span class="tag">Automation</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="projects" class="section-wrap">
+  <div class="section-label">03 — Projects</div>
+  <h2>Things I've built</h2>
+  <div class="projects-grid">
+    <a class="project-card" href="https://github.com/AnisEmad/Flask_hello" target="_blank">
+      <div class="proj-num">001</div>
+      <div class="proj-title">CI/CD Pipeline for Flask App</div>
+      <div class="proj-desc">A fully automated pipeline that handles testing and deployment for a Flask application — from code push to containerized delivery on DockerHub.</div>
+      <div class="proj-tags">
+        <span class="ptag">GitHub Actions</span>
+        <span class="ptag">Docker</span>
+        <span class="ptag">DockerHub</span>
+        <span class="ptag">Flask</span>
+        <span class="ptag">Python</span>
+      </div>
+      <div class="proj-arrow">View on GitHub ↗</div>
+    </a>
+    <a class="project-card" href="https://github.com/AnisEmad/Flask_hello" target="_blank">
+      <div class="proj-num">002</div>
+      <div class="proj-title">ALX System Engineering & DevOps</div>
+      <div class="proj-desc">Hands-on ALX program training covering Linux system administration, shell scripting, automation, and foundational DevOps practices end-to-end.</div>
+      <div class="proj-tags">
+        <span class="ptag">Linux</span>
+        <span class="ptag">Bash</span>
+        <span class="ptag">Docker</span>
+        <span class="ptag">GitHub Actions</span>
+      </div>
+      <div class="proj-arrow">View on GitHub ↗</div>
+    </a>
+    <a class="project-card" href="https://github.com/AnisEmad/EquiCare_backend" target="_blank">
+      <div class="proj-num">003</div>
+      <div class="proj-title">EquiCare — Horse Management System</div>
+      <div class="proj-desc">Graduation project: a full backend with authentication and community features, containerized with Docker for consistent and portable deployments.</div>
+      <div class="proj-tags">
+        <span class="ptag">Flask</span>
+        <span class="ptag">MySQL</span>
+        <span class="ptag">Docker</span>
+        <span class="ptag">REST API</span>
+        <span class="ptag">Python</span>
+      </div>
+      <div class="proj-arrow">View on GitHub ↗</div>
+    </a>
+  </div>
+</div>
+
+<div id="contact" class="section-wrap">
+  <div class="section-label">04 — Contact</div>
+  <h2>Let's connect</h2>
+  <p class="contact-intro">I'm currently open to DevOps roles and freelance opportunities. Feel free to reach out through any of the channels below.</p>
+  <div class="contact-grid">
+    <a class="contact-item" href="mailto:anisemad123@gmail.com">
+      <span class="c-label">Email</span>
+      <span class="c-value">anisemad123@gmail.com ↗</span>
+    </a>
+    <a class="contact-item" href="tel:+201207905214">
+      <span class="c-label">Phone</span>
+      <span class="c-value">+20 120 790 5214 ↗</span>
+    </a>
+    <a class="contact-item" href="https://linkedin.com/in/anisemad" target="_blank">
+      <span class="c-label">LinkedIn</span>
+      <span class="c-value">linkedin.com/in/anisemad ↗</span>
+    </a>
+    <a class="contact-item" href="https://github.com/AnisEmad" target="_blank">
+      <span class="c-label">GitHub</span>
+      <span class="c-value">github.com/AnisEmad ↗</span>
+    </a>
+  </div>
+</div>
+
+<footer>Anis Emad &copy; 2026 — Cairo, Egypt</footer>
+
+</body>
+</html>
